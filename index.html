@@ -8,12 +8,29 @@
 <body>
     <header>
         <h1>Watcherub</h1>
-        <input type="text" id="search" placeholder="Search videos...">
+        <div class="header-controls">
+            <input type="text" id="search" placeholder="Search videos...">
+            <button id="theme-toggle">Toggle Theme</button>
+            <button id="make-video">Make VIDEO</button>
+        </div>
     </header>
 
     <main id="video-feed">
-        <!-- Video cards injected via JS -->
+        <!-- Video cards inserted via JS -->
     </main>
+
+    <!-- Modal for adding videos -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal">&times;</span>
+            <h2>Add a New Video</h2>
+            <input type="text" id="new-title" placeholder="Video title"><br>
+            <input type="text" id="new-desc" placeholder="Video description"><br>
+            <input type="text" id="new-thumb" placeholder="Thumbnail URL"><br>
+            <input type="text" id="new-file" placeholder="Video file URL"><br>
+            <button id="add-video-btn">Add Video</button>
+        </div>
+    </div>
 
     <script src="js/main.js"></script>
 </body>
