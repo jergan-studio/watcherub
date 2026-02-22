@@ -1,5 +1,5 @@
-// Sample videos array
-let videos = [
+// Load videos from localStorage or use default
+let videos = JSON.parse(localStorage.getItem("watcherub_videos")) || [
     {title: "Sample Video 1", thumbnail: "videos/thumb1.jpg", url: "video.html?v=1", desc: "This is sample video 1"},
     {title: "Sample Video 2", thumbnail: "videos/thumb2.jpg", url: "video.html?v=2", desc: "This is sample video 2"},
 ];
@@ -22,6 +22,11 @@ function renderVideos(filter="") {
             `;
             feed.appendChild(card);
         });
+}
+
+// Save videos to localStorage
+function saveVideos() {
+    localStorage.setItem("watcherub_videos", JSON.stringify(videos));
 }
 
 renderVideos();
@@ -50,13 +55,15 @@ document.getElementById("add-video-btn").addEventListener("click", () => {
     const file = document.getElementById("new-file").value;
 
     if(title && thumb && file){
-        videos.push({
+        const newVideo = {
             title: title,
             thumbnail: thumb,
             url: "video.html?v=" + (videos.length+1),
             desc: desc || "No description"
-        });
-        renderVideos();
+        };
+        videos.push(newVideo);
+        saveVideos();        // save to localStorage
+        renderVideos();      // refresh feed
         modal.style.display = "none";
         document.getElementById("new-title").value = "";
         document.getElementById("new-desc").value = "";
