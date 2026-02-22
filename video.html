@@ -10,9 +10,33 @@
         <a href="index.html">← Back to Watcherub</a>
     </header>
     <main>
-        <video controls width="800" src="videos/sample.mp4"></video>
-        <h2>Sample Video Title</h2>
-        <p>Video description goes here...</p>
+        <video controls width="800" id="player">
+            <source id="video-src" src="" type="video/mp4">
+        </video>
+        <h2 id="video-title">Video Title</h2>
+        <p id="video-desc">Video description goes here...</p>
     </main>
+
+    <script>
+    // Load video from query param (?v=1)
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoId = urlParams.get('v');
+
+    const videos = [
+        {title: "Sample Video 1", file: "videos/sample1.mp4", desc: "This is sample video 1"},
+        {title: "Sample Video 2", file: "videos/sample2.mp4", desc: "This is sample video 2"}
+    ];
+
+    if(videoId && videos[videoId-1]){
+        const video = videos[videoId-1];
+        document.getElementById("video-src").src = video.file;
+        document.getElementById("video-title").textContent = video.title;
+        document.getElementById("video-desc").textContent = video.desc;
+        document.getElementById("player").load();
+    } else {
+        document.getElementById("video-title").textContent = "Video not found";
+        document.getElementById("player").style.display = "none";
+    }
+    </script>
 </body>
 </html>
